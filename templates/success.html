@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>訂購成功！ - 酷洛米甜點時光 Kuromi Sweet Time</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <!-- 導覽列 -->
+    <header>
+        <div class="nav-container">
+            <a href="/" class="logo">
+                <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Kuromi Logo" class="logo-img">
+                <span>Kuromi Sweet Time</span>
+            </a>
+            <nav>
+                <ul>
+                    <li><a href="/">首頁</a></li>
+                    <li><a href="/order">線上訂購</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="section-container">
+        
+        <div class="success-card">
+            <div class="success-icon">🧁</div>
+            <h2>訂購成功 🖤</h2>
+            <p>感謝您的訂購！我們已將您的訂單記錄至系統，並安排手作製作。</p>
+
+            <!-- 信件狀態提示 -->
+            {% if "模擬" in email_info %}
+                <div class="email-banner failed">
+                    <strong>✉ 系統訊息：</strong> {{ email_info }}<br>
+                    <span style="font-size: 12px; opacity: 0.9;">（您可以開啟後端終端機/命令列查看模擬信件的詳細內容）</span>
+                </div>
+            {% elif "成功" in email_info %}
+                <div class="email-banner">
+                    <strong>✉ 通知信已寄出：</strong> 系統已成功自動寄送確認信至 <strong>{{ order.email }}</strong>。
+                </div>
+            {% else %}
+                <div class="email-banner failed">
+                    <strong>✉ 通知信寄送狀態：</strong> {{ email_info }}
+                </div>
+            {% endif %}
+
+            <!-- 訂單明細 -->
+            <div class="order-detail-box">
+                <div class="detail-title">
+                    <span>📋 您的訂購明細</span>
+                    <span style="font-size: 13px; color: var(--kuromi-pink); background-color: var(--kuromi-light-pink); padding: 2px 10px; border-radius: 20px; border: 1px solid var(--kuromi-pink);">未付款 (取貨付款)</span>
+                </div>
+                
+                <div class="detail-row">
+                    <div class="detail-label">顧客姓名：</div>
+                    <div class="detail-value">{{ order.name }}</div>
+                </div>
+                <div class="detail-row">
+                    <div class="detail-label">聯絡電話：</div>
+                    <div class="detail-value">{{ order.phone }}</div>
+                </div>
+                <div class="detail-row">
+                    <div class="detail-label">電子信箱：</div>
+                    <div class="detail-value">{{ order.email }}</div>
+                </div>
+                <div class="detail-row">
+                    <div class="detail-label">訂購品項：</div>
+                    <div class="detail-value" style="font-weight: bold; color: var(--kuromi-pink);">{{ order.cake_item }}</div>
+                </div>
+                <div class="detail-row">
+                    <div class="detail-label">數量：</div>
+                    <div class="detail-value">{{ order.quantity }} 個</div>
+                </div>
+                <div class="detail-row">
+                    <div class="detail-label">取貨方式：</div>
+                    <div class="detail-value">{{ order.delivery_type }}</div>
+                </div>
+                {% if order.delivery_type == '外送' %}
+                <div class="detail-row">
+                    <div class="detail-label">外送地址：</div>
+                    <div class="detail-value">{{ order.address }}</div>
+                </div>
+                {% endif %}
+                <div class="detail-row">
+                    <div class="detail-label">預定日期：</div>
+                    <div class="detail-value" style="font-weight: bold;">{{ order.delivery_date }}</div>
+                </div>
+                <div class="detail-row">
+                    <div class="detail-label">備註說明：</div>
+                    <div class="detail-value">{{ order.notes if order.notes else '無' }}</div>
+                </div>
+            </div>
+
+            <!-- 操作按鈕 -->
+            <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
+                <a href="/" class="btn-kuromi btn-secondary">回首頁</a>
+                <a href="/order" class="btn-kuromi">繼續訂購 🧁</a>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- 頁尾 -->
+    <footer>
+        <div class="footer-content">
+            <h3>🖤 Kuromi Sweet Time 🖤</h3>
+            <p>台北市大安區甜蜜路 99 號 | 電話：(02) 1234-5678</p>
+            <p>© 2026 酷洛米甜點時光. All Rights Reserved. 期末專案網站 | <a href="/admin" style="font-size: 11px; opacity: 0.4; color: #A39BB0; text-decoration: none;">管理登入</a></p>
+        </div>
+    </footer>
+
+</body>
+</html>

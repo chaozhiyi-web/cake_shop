@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>酷洛米甜點時光 Kuromi Sweet Time | 蛋糕店線上訂購</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <!-- 導覽列 -->
+    <header>
+        <div class="nav-container">
+            <a href="/" class="logo">
+                <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Kuromi Logo" class="logo-img">
+                <span>Kuromi Sweet Time</span>
+            </a>
+            <nav>
+                <ul>
+                    <li><a href="/" class="active">首頁</a></li>
+                    <li><a href="/order">線上訂購</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero 橫幅 -->
+    <section class="hero">
+        <div class="hero-content">
+            <span class="hero-badge">
+                <img src="{{ url_for('static', filename='images/logo.png') }}" alt="logo" class="badge-logo">
+                限量手作甜點
+                <img src="{{ url_for('static', filename='images/logo.png') }}" alt="logo" class="badge-logo">
+            </span>
+            <h1>酷洛米甜點時光</h1>
+            <p>融合惡魔的頑皮魅力與手作甜點的極致甜蜜，為您打造最獨特的味蕾饗宴！</p>
+            <a href="/order" class="btn-kuromi">
+                <span>立即線上訂購</span>
+                <span style="font-size: 20px;">➔</span>
+            </a>
+        </div>
+    </section>
+
+    <!-- 主要內容區 -->
+    <main class="section-container">
+        
+        <!-- 品牌介紹 -->
+        <section class="intro-card">
+            <div class="intro-img">
+                <img src="{{ url_for('static', filename='images/kuromi_kitchen.jpg') }}" alt="酷洛米烘焙廚房">
+            </div>
+            <div class="intro-text">
+                <h3><span>🧁</span> 關於酷洛米甜點時光</h3>
+                <p>我們是一家充滿個性與奇幻色彩的可愛甜點店。這裡不僅有甜而不膩的經典美味，更有獨特調配的特製風味。每一顆草莓、每一絲芋泥、每一滴濃郁可可，都經過甜點師傅的精心挑選與手作溫度，為您傳遞最真摯的甜蜜與幸福！</p>
+            </div>
+        </section>
+
+        <!-- ★ 本店熱銷no.1蛋糕 ★ -->
+        <section class="hot-seller-section" style="margin-bottom: 60px;">
+            <h2 class="section-title">👑 本店熱銷 NO.1 蛋糕</h2>
+            <div class="intro-card" style="border-color: var(--kuromi-pink); box-shadow: 6px 6px 0 var(--kuromi-black); border: 3px solid var(--kuromi-black);">
+                <div class="intro-img" style="box-shadow: 6px 6px 0 var(--kuromi-black); border: 3px solid var(--kuromi-black); position: relative;">
+                    <span class="cake-badge" style="background:var(--kuromi-pink); top: 15px; left: 15px; right: auto; border: 2px solid var(--kuromi-black);">熱銷冠冕 🏆</span>
+                    <img src="{{ url_for('static', filename='images/kuromi_taro_chiffon.jpg') }}" alt="庫洛米造型蛋糕(芋頭戚風)">
+                </div>
+                <div class="intro-text">
+                    <h3 style="color: var(--kuromi-pink); font-size: 28px; font-weight: 900; margin-bottom: 15px;">庫洛米造型蛋糕(芋頭戚風)</h3>
+                    <p style="font-size: 17px; line-height: 1.8; color: var(--text-dark); margin-bottom: 25px;">
+                        芋泥控與庫洛米粉絲的終極夢幻逸品！選用香醇大甲芋頭製成滑順細緻的芋泥，搭配輕盈戚風蛋糕體與特調紫薯鮮奶油。頂部精緻擺放兩隻手工捏製的立體庫洛米糖偶，並以優雅的黑色蕾絲與白奶油花邊圍繞，口感層次豐富、香氣濃郁，是本店當之無愧的超人氣冠軍！
+                    </p>
+                    <div style="display: flex; justify-content: space-between; align-items: center; border-top: 2px dashed var(--kuromi-light-purple); padding-top: 20px;">
+                        <span class="cake-price" style="font-size: 24px;">NT$ 1,680 / 6吋</span>
+                        <a href="/order?item=庫洛米造型蛋糕(芋頭戚風)" class="btn-kuromi" style="font-size: 16px; padding: 8px 22px; border-radius: 12px; box-shadow: 3px 3px 0 var(--kuromi-black);">立即預訂 💜</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ★ 推薦品項 ★ -->
+        <section style="margin-bottom: 60px;">
+            <h2 class="section-title">✨ 推薦品項</h2>
+            <div class="featured-grid">
+
+                <!-- 推薦 1：布朗尼 -->
+                <div class="featured-card">
+                    <div class="featured-img-wrapper">
+                        <span class="cake-badge" style="background:var(--kuromi-pink);">本週推薦</span>
+                        <img src="https://images.unsplash.com/photo-1606313564200-e75d5e30476c?w=600&auto=format&fit=crop&q=80" alt="布朗尼">
+                    </div>
+                    <div class="cake-info">
+                        <h4 class="cake-title">布朗尼</h4>
+                        <p class="cake-desc">以頂級黑巧克力與無鹽奶油精心烘焙而成，外層帶有微脆的糖脆殼，內裡濕潤濃郁、口感厚實，每一口都充滿深邃的可可香氣，是巧克力愛好者的必嚐首選。</p>
+                        <div class="cake-footer">
+                            <span class="cake-price">NT$ 780 / 6吋</span>
+                            <a href="/order?item=布朗尼" class="btn-kuromi" style="font-size: 13px; padding: 6px 14px; border-radius: 8px; box-shadow: 2px 2px 0 var(--kuromi-black);">預訂</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 推薦 2：冰心芒果捲 -->
+                <div class="featured-card">
+                    <div class="featured-img-wrapper">
+                        <span class="cake-badge" style="background:var(--kuromi-pink);">季節限定</span>
+                        <img src="{{ url_for('static', filename='images/mango_roll.png') }}" alt="冰心芒果捲">
+                    </div>
+                    <div class="cake-info">
+                        <h4 class="cake-title">冰心芒果捲</h4>
+                        <p class="cake-desc">選用當季愛文芒果，包裹在柔軟蓬鬆的蜂蜜蛋糕卷中，夾入清爽芒果鮮奶油與新鮮芒果丁，表面撒上細緻糖粉，一口即感受濃郁果香與冰涼滑順的層次。</p>
+                        <div class="cake-footer">
+                            <span class="cake-price">NT$ 720 / 條</span>
+                            <a href="/order?item=冰心芒果捲" class="btn-kuromi" style="font-size: 13px; padding: 6px 14px; border-radius: 8px; box-shadow: 2px 2px 0 var(--kuromi-black);">預訂</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 推薦 3：藍莓塔 -->
+                <div class="featured-card">
+                    <div class="featured-img-wrapper">
+                        <span class="cake-badge" style="background:var(--kuromi-pink);">人氣TOP</span>
+                        <img src="{{ url_for('static', filename='images/blueberry_tart.png') }}" alt="藍莓塔">
+                    </div>
+                    <div class="cake-info">
+                        <h4 class="cake-title">藍莓塔</h4>
+                        <p class="cake-desc">每日新鮮手作的香脆塔殼，填入藍莓卡士達內餡與果醬，表面細緻排列飽滿多汁的新鮮藍莓粒，每一口都能品嚐到天然果香與卡士達香氣。</p>
+                        <div class="cake-footer">
+                            <span class="cake-price">NT$ 980 / 6吋</span>
+                            <a href="/order?item=藍莓塔" class="btn-kuromi" style="font-size: 13px; padding: 6px 14px; border-radius: 8px; box-shadow: 2px 2px 0 var(--kuromi-black);">預訂</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ★ 所有品項（分頁） ★ -->
+        <section>
+            <h2 class="section-title">🍰 所有品項</h2>
+
+            <!-- 分頁按鈕 -->
+            <div class="page-tabs" id="pageTabs">
+                <button class="page-tab active" onclick="showPage(1)">庫洛米系列</button>
+                <button class="page-tab" onclick="showPage(2)">奶油蛋糕</button>
+                <button class="page-tab" onclick="showPage(3)">塔類甜點</button>
+                <button class="page-tab" onclick="showPage(4)">巧克力系列</button>
+                <button class="page-tab" onclick="showPage(5)">特色品項</button>
+            </div>
+
+            <!-- 第 1 頁：庫洛米系列 -->
+            <div class="cake-grid page-content" id="page1">
+                <!-- 庫洛米造型蛋糕(芋頭戚風) -->
+                <div class="cake-card">
+                    <div class="cake-img-wrapper">
+                        <span class="cake-badge" style="background:var(--kuromi-pink);">熱銷NO.1 🏆</span>
+                        <img src="{{ url_for('static', filename='images/kuromi_taro_chiffon.jpg') }}" alt="庫洛米造型蛋糕(芋頭戚風)">
+                    </div>
+                    <div class="cake-info">
+                        <h4 class="cake-title">庫洛米造型蛋糕(芋頭戚風)</h4>
+                        <p class="cake-desc">大甲香醇芋泥夾入輕盈戚風，外層裹以紫薯鮮奶油，頂部精緻擺放手工立體庫洛米糖偶，配上蕾絲花邊，是本店最具人氣的美味冠軍。</p>
+                        <div class="cake-footer">
+                            <span class="cake-price">NT$ 1,680 / 6吋</span>
+                            <a href="/order?item=庫洛米造型蛋糕(芋頭戚風)" class="btn-kuromi" style="font-size:13px;padding:6px 14px;border-radius:8px;box-shadow:2px 2px 0 var(--kuromi-black);">預訂</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3D庫洛米蛋糕(水果戚風) -->
+                <div class="cake-card">
+                    <div class="cake-img-wrapper">
+                        <span class="cake-badge">立體造型 💜</span>
+                        <img src="{{ url_for('static', filename='images/kuromi_3d_fruit.png') }}" alt="3D庫洛米蛋糕(水果戚風)">
+                    </div>
+                    <div class="cake-info">
+                        <h4 class="cake-title">3D庫洛米蛋糕(水果戚風)</h4>
+                        <p class="cake-desc">蓬鬆無負擔的香草戚風，夾入時令新鮮水果丁與清爽卡士達，外層以立體細緻擠花呈現毛茸茸的庫洛米萌樣，派對慶生首選！</p>
+                        <div class="cake-footer">
+                            <span class="cake-price">NT$ 1,980 / 6吋</span>
+                            <a href="/order?item=3D庫洛米蛋糕(水果戚風)" class="btn-kuromi" style="font-size:13px;padding:6px 14px;border-radius:8px;box-shadow:2px 2px 0 var(--kuromi-black);">預訂</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 蝴蝶蕾絲邊庫洛米蛋糕(巧克力戚風) -->
+                <div class="cake-card">
+                    <div class="cake-img-wrapper">
+                        <span class="cake-badge">歌德奢華 🖤</span>
+                        <img src="{{ url_for('static', filename='images/kuromi_lace_chocolate.png') }}" alt="蝴蝶蕾絲邊庫洛米蛋糕(巧克力戚風)">
+                    </div>
+                    <div class="cake-info">
+                        <h4 class="cake-title">蝴蝶蕾絲邊庫洛米蛋糕(巧克力戚風)</h4>
+                        <p class="cake-desc">濃郁醇香巧克力戚風夾入巧克力甘納許，外層以紫色與粉色擠花交織出蓬鬆蕾絲裙擺，黑絲帶蝴蝶結點綴，展現甜美與叛逆的完美化身。</p>
+                        <div class="cake-footer">
+                            <span class="cake-price">NT$ 1,880 / 6吋</span>
+                            <a href="/order?item=蝴蝶蕾絲邊庫洛米蛋糕(巧克力戚風)" class="btn-kuromi" style="font-size:13px;padding:6px 14px;border-radius:8px;box-shadow:2px 2px 0 var(--kuromi-black);">預訂</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 第 2 頁：奶油蛋糕 -->
+            <div class="cake-grid page-content" id="page2" style="display:none;">
+                <div class="cake-card">
+                    <div class="cake-img-wrapper">
+                        <span class="cake-badge">經典招牌</span>
+                        <img src="{{ url_for('static', filename='images/strawberry_cake.png') }}" alt="招牌鮮奶油草莓蛋糕">
+                    </div>
+                    <div class="cake-info">
+                        <h4 class="cake-title">招牌鮮奶油草莓蛋糕</h4>
+                        <p class="cake-desc">店內最著名的招牌代表作！蓬鬆的巧克力戚風夾入草莓鮮奶油，外層裹上輕盈滑順的獨門鮮奶油與紅櫻桃，甜而不膩的古早好滋味。</p>
+                        <div class="cake-footer">
+                            <span class="cake-price">NT$ 690 / 6吋</span>
+                            <a href="/order?item=招牌鮮奶油草莓蛋糕" class="btn-kuromi" style="font-size:13px;padding:6px 14px;border-radius:8px;box-shadow:2px 2px 0 var(--kuromi-black);">預訂</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="cake-card">
+                    <div class="cake-img-wrapper">
+                        <span class="cake-badge">復古風味</span>
+                        <img src="{{ url_for('static', filename='images/taro_cake.png') }}" alt="經典芋泥奶油蛋糕" style="object-position: top;">
+                    </div>
+                    <div class="cake-info">
+                        <h4 class="cake-title">經典芋泥奶油蛋糕</h4>
+                        <p class="cake-desc">超人氣熱銷款！蓬鬆香草戚風抹上淡雅紫色的特調芋泥鮮奶油，頂部以經典奶油花與白紫雙色法式拉花裝飾，滿載綿密與香甜的芋香風味。</p>
+                        <div class="cake-footer">
+                            <span class="cake-price">NT$ 850 / 6吋</span>
+                            <a href="/order?item=經典芋泥奶油蛋糕" class="btn-kuromi" style="font-size:13px;padding:6px 14px;border-radius:8px;box-shadow:2px 2px 0 var(--kuromi-black);">預訂</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="cake-card">
+                    <div class="cake-img-wrapper">
+                        <span class="cake-badge">酸甜迷人</span>
+                        <img src="https://images.unsplash.com/photo-1565958011703-44f9829ba187?w=600&auto=format&fit=crop&q=80" alt="覆盆子蛋糕">
+                    </div>
+                    <div class="cake-info">
+                        <h4 class="cake-title">覆盆子蛋糕</h4>
+                        <p class="cake-desc">以清爽香草戚風為基底，抹上濃郁的覆盆子果醬與輕盈鮮奶油，頂部裝飾新鮮覆盆子與薄荷葉，果香豐富、酸甜層次分明，帶來如森林般清新的迷人滋味。</p>
+                        <div class="cake-footer">
+                            <span class="cake-price">NT$ 1,080 / 6吋</span>
+                            <a href="/order?item=覆盆子蛋糕" class="btn-kuromi" style="font-size:13px;padding:6px 14px;border-radius:8px;box-shadow:2px 2px 0 var(--kuromi-black);">預訂</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 第 3 頁：塔類甜點 -->
+            <div class="cake-grid page-content" id="page3" style="display:none;">
+                <div class="cake-card">
+                    <div class="cake-img-wrapper">
+                        <span class="cake-badge">麝香綠葡萄</span>
+                        <img src="{{ url_for('static', filename='images/grape_tart.png') }}" alt="碧玉葡萄塔">
+                    </div>
+                    <div class="cake-info">
+                        <h4 class="cake-title">碧玉葡萄塔</h4>
+                        <p class="cake-desc">酥脆手工塔皮鋪上濃郁杏仁餡，層層疊上香甜滑順的卡士達醬，表面鋪滿如綠寶石般飽滿多汁的無籽麝香綠葡萄切片，酸甜爽口。</p>
+                        <div class="cake-footer">
+                            <span class="cake-price">NT$ 980 / 6吋</span>
+                            <a href="/order?item=碧玉葡萄塔" class="btn-kuromi" style="font-size:13px;padding:6px 14px;border-radius:8px;box-shadow:2px 2px 0 var(--kuromi-black);">預訂</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="cake-card">
+                    <div class="cake-img-wrapper">
+                        <span class="cake-badge">新鮮藍莓</span>
+                        <img src="{{ url_for('static', filename='images/blueberry_tart.png') }}" alt="藍莓塔">
+                    </div>
+                    <div class="cake-info">
+                        <h4 class="cake-title">藍莓塔</h4>
+                        <p class="cake-desc">每日新鮮手作的香脆塔殼，填入藍莓卡士達內餡與果醬，表面細緻排列飽滿多汁的新鮮藍莓粒，每一口都能品嚐到天然果香與卡士達香氣。</p>
+                        <div class="cake-footer">
+                            <span class="cake-price">NT$ 980 / 6吋</span>
+                            <a href="/order?item=藍莓塔" class="btn-kuromi" style="font-size:13px;padding:6px 14px;border-radius:8px;box-shadow:2px 2px 0 var(--kuromi-black);">預訂</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="cake-card">
+                    <div class="cake-img-wrapper">
+                        <span class="cake-badge">獨家必點</span>
+                        <img src="{{ url_for('static', filename='images/lemon_tart.png') }}" alt="法式檸檬塔">
+                    </div>
+                    <div class="cake-info">
+                        <h4 class="cake-title">法式檸檬塔</h4>
+                        <p class="cake-desc">手工捏製酥脆塔皮，填入黃金比例的屏東綠檸檬奶黃內餡，上層鋪滿新鮮檸檬切片點綴，酸甜平衡，口感清爽順口。</p>
+                        <div class="cake-footer">
+                            <span class="cake-price">NT$ 1,380 / 6吋</span>
+                            <a href="/order?item=法式檸檬塔" class="btn-kuromi" style="font-size:13px;padding:6px 14px;border-radius:8px;box-shadow:2px 2px 0 var(--kuromi-black);">預訂</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 第 4 頁：巧克力系列 -->
+            <div class="cake-grid page-content" id="page4" style="display:none;">
+                <div class="cake-card">
+                    <div class="cake-img-wrapper">
+                        <span class="cake-badge">濃郁扎實</span>
+                        <img src="https://images.unsplash.com/photo-1606313564200-e75d5e30476c?w=600&auto=format&fit=crop&q=80" alt="布朗尼">
+                    </div>
+                    <div class="cake-info">
+                        <h4 class="cake-title">布朗尼</h4>
+                        <p class="cake-desc">以頂級黑巧克力與無鹽奶油精心烘焙而成，外層帶有微脆的糖脆殼，內裡濕潤濃郁、口感厚實，每一口都充滿深邃的可可香氣，是巧克力愛好者的必嚐首選。</p>
+                        <div class="cake-footer">
+                            <span class="cake-price">NT$ 780 / 6吋</span>
+                            <a href="/order?item=布朗尼" class="btn-kuromi" style="font-size:13px;padding:6px 14px;border-radius:8px;box-shadow:2px 2px 0 var(--kuromi-black);">預訂</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="cake-card">
+                    <div class="cake-img-wrapper">
+                        <span class="cake-badge">苦甜奢華</span>
+                        <img src="{{ url_for('static', filename='images/chocolate_cake.png') }}" alt="巧克力鮮奶油蛋糕">
+                    </div>
+                    <div class="cake-info">
+                        <h4 class="cake-title">巧克力鮮奶油蛋糕</h4>
+                        <p class="cake-desc">使用 65% 比利時進口巧克力調製成醇厚鮮奶油，與柔軟巧克力戚風糕體堆疊，點綴生巧克力磚與金箔，散發大人的成熟風味。</p>
+                        <div class="cake-footer">
+                            <span class="cake-price">NT$ 1,580 / 6吋</span>
+                            <a href="/order?item=巧克力鮮奶油蛋糕" class="btn-kuromi" style="font-size:13px;padding:6px 14px;border-radius:8px;box-shadow:2px 2px 0 var(--kuromi-black);">預訂</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="cake-card">
+                    <div class="cake-img-wrapper">
+                        <span class="cake-badge">極致絲滑</span>
+                        <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=600&auto=format&fit=crop&q=80" alt="黑絲絨巧克力蛋糕">
+                    </div>
+                    <div class="cake-info">
+                        <h4 class="cake-title">黑絲絨巧克力蛋糕</h4>
+                        <p class="cake-desc">濕潤扎實的黑可可蛋糕體，夾入醇厚香濃的黑巧克力卡士達內餡，外層裹以細緻的黑巧奶油，入口如絲絨般柔滑，巧克力控的極致享受。</p>
+                        <div class="cake-footer">
+                            <span class="cake-price">NT$ 450 / 6吋</span>
+                            <a href="/order?item=黑絲絨巧克力蛋糕" class="btn-kuromi" style="font-size:13px;padding:6px 14px;border-radius:8px;box-shadow:2px 2px 0 var(--kuromi-black);">預訂</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 第 5 頁：特色品項 -->
+            <div class="cake-grid page-content" id="page5" style="display:none;">
+                <div class="cake-card">
+                    <div class="cake-img-wrapper">
+                        <span class="cake-badge">季節限定</span>
+                        <img src="{{ url_for('static', filename='images/mango_roll.png') }}" alt="冰心芒果捲">
+                    </div>
+                    <div class="cake-info">
+                        <h4 class="cake-title">冰心芒果捲</h4>
+                        <p class="cake-desc">選用當季愛文芒果，包裹在柔軟蓬鬆的蜂蜜蛋糕卷中，夾入清爽芒果鮮奶油與新鮮芒果丁，表面撒上細緻糖粉，一口即感受濃郁果香與冰涼滑順的層次。</p>
+                        <div class="cake-footer">
+                            <span class="cake-price">NT$ 720 / 條</span>
+                            <a href="/order?item=冰心芒果捲" class="btn-kuromi" style="font-size:13px;padding:6px 14px;border-radius:8px;box-shadow:2px 2px 0 var(--kuromi-black);">預訂</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="cake-card">
+                    <div class="cake-img-wrapper">
+                        <span class="cake-badge">人氣經典</span>
+                        <img src="{{ url_for('static', filename='images/boston_pie.png') }}" alt="波士頓派">
+                    </div>
+                    <div class="cake-info">
+                        <h4 class="cake-title">波士頓派</h4>
+                        <p class="cake-desc">兩片輕盈蓬鬆的戚風蛋糕體，夾入香滑濃郁的卡士達奶油餡，表面均勻撒上一層細緻糖粉，外型樸素卻滋味迷人，每一口都是綿密奶香與蛋糕的完美融合，是百吃不膩的臺式懷舊經典。</p>
+                        <div class="cake-footer">
+                            <span class="cake-price">NT$ 560 / 個</span>
+                            <a href="/order?item=波士頓派" class="btn-kuromi" style="font-size:13px;padding:6px 14px;border-radius:8px;box-shadow:2px 2px 0 var(--kuromi-black);">預訂</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="cake-card">
+                    <div class="cake-img-wrapper">
+                        <span class="cake-badge">鹹甜絕配</span>
+                        <img src="{{ url_for('static', filename='images/sea_salt_cheese.png') }}" alt="海鹽雙層乳酪">
+                    </div>
+                    <div class="cake-info">
+                        <h4 class="cake-title">海鹽雙層乳酪</h4>
+                        <p class="cake-desc">以手工餅乾底作基底，疊上濃郁的蔓越莓果凍層，再鋪上滑順輕盈的雙層乳酪慕斯，頂部撒滿香脆核桃與蔓越莓碎，最後點上一抹天然海鹽提味，鹹甜交織、層次豐富，是令人驚喜的絕妙組合。</p>
+                        <div class="cake-footer">
+                            <span class="cake-price">NT$ 1,280 / 6吋</span>
+                            <a href="/order?item=海鹽雙層乳酪" class="btn-kuromi" style="font-size:13px;padding:6px 14px;border-radius:8px;box-shadow:2px 2px 0 var(--kuromi-black);">預訂</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- 頁尾 -->
+    <footer>
+        <div class="footer-content">
+            <h3>🖤 Kuromi Sweet Time 🖤</h3>
+            <p>台北市大安區甜蜜路 99 號 | 電話：(02) 1234-5678</p>
+            <p>© 2026 酷洛米甜點時光. All Rights Reserved. 期末專案網站 | <a href="/admin" style="font-size: 11px; opacity: 0.4; color: #A39BB0; text-decoration: none;">管理登入</a></p>
+        </div>
+    </footer>
+
+    <script>
+        function showPage(n) {
+            // 隱藏所有頁
+            document.querySelectorAll('.page-content').forEach(el => el.style.display = 'none');
+            // 取消所有 tab active
+            document.querySelectorAll('.page-tab').forEach(btn => btn.classList.remove('active'));
+            // 顯示目標頁
+            document.getElementById('page' + n).style.display = 'grid';
+            // 啟用目標 tab
+            document.querySelectorAll('.page-tab')[n - 1].classList.add('active');
+        }
+    </script>
+
+</body>
+</html>

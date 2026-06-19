@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>訂單管理後台 - 酷洛米甜點時光 Kuromi Sweet Time</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <!-- 導覽列 -->
+    <header>
+        <div class="nav-container">
+            <a href="/" class="logo">
+                <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Kuromi Logo" class="logo-img">
+                <span>Kuromi Sweet Time</span>
+            </a>
+            <nav>
+                <ul>
+                    <li><a href="/">首頁</a></li>
+                    <li><a href="/order">線上訂購</a></li>
+                    <li><a href="/admin/logout">登出後台 🚪</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="section-container">
+        
+        <div class="admin-header-box">
+            <div>
+                <h1 class="admin-title">😈 訂單管理後台</h1>
+                <p style="color: var(--text-muted); margin-top: 5px;">即時監控所有來自前台訂購單的數據，資料串接自本地端 Excel 試算表。</p>
+            </div>
+            
+            <!-- 數據小卡片 -->
+            <div class="stat-card">
+                <div>
+                    <span style="font-size: 14px; font-weight: 700; color: var(--text-muted); display: block;">目前累積訂單數</span>
+                    <span class="stat-num" id="orderCount">{{ total_orders }}</span> <span style="font-size: 14px; font-weight: 700; color: var(--text-muted);">筆</span>
+                </div>
+                <div style="font-size: 30px;">🍰</div>
+            </div>
+        </div>
+
+        <!-- 訂單表格 -->
+        <div class="orders-table-wrapper">
+            {% if orders %}
+                <table class="orders-table">
+                    <thead>
+                        <tr>
+                            <th style="width: 140px;">訂購時間</th>
+                            <th>顧客姓名</th>
+                            <th>電話</th>
+                            <th>Email</th>
+                            <th>訂購品項</th>
+                            <th style="width: 60px; text-align: center;">數量</th>
+                            <th>取件方式</th>
+                            <th>配送地址</th>
+                            <th>預定日期</th>
+                            <th>備註說明</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for order in orders %}
+                            <tr>
+                                <td style="color: var(--text-muted); font-size: 13px;">{{ order.order_time }}</td>
+                                <td style="font-weight: 700; color: var(--kuromi-dark-purple);">{{ order.name }}</td>
+                                <td>{{ order.phone }}</td>
+                                <td>
+                                    <a href="mailto:{{ order.email }}" style="color: var(--kuromi-purple); border-bottom: 1px dashed var(--kuromi-purple); font-size: 13px;">
+                                        {{ order.email }}
+                                    </a>
+                                </td>
+                                <td style="font-weight: 700; color: var(--kuromi-pink);">{{ order.cake_item }}</td>
+                                <td style="text-align: center; font-weight: 700;">{{ order.quantity }}</td>
+                                <td>
+                                    {% if order.delivery_type == '自取' %}
+                                        <span class="badge-delivery pickup">門市自取 🏪</span>
+                                    {% else %}
+                                        <span class="badge-delivery delivery">黑貓外送 🚚</span>
+                                    {% endif %}
+                                </td>
+                                <td class="expandable-cell">
+                                    <div class="text-wrapper">{{ order.address }}</div>
+                                    {% if order.address and order.address != '無' and order.address|length > 10 %}
+                                        <span class="toggle-text-btn" onclick="toggleText(this)">顯示完整資訊</span>
+                                    {% endif %}
+                                </td>
+                                <td style="font-weight: 700;">{{ order.delivery_date }}</td>
+                                <td class="expandable-cell" style="color: var(--text-muted); font-size: 13px;">
+                                    <div class="text-wrapper">{{ order.notes if order.notes else '無' }}</div>
+                                    {% if order.notes and order.notes != '無' and order.notes|length > 10 %}
+                                        <span class="toggle-text-btn" onclick="toggleText(this)">顯示完整資訊</span>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <div style="text-align: center; padding: 60px 20px;">
+                    <div style="font-size: 60px; margin-bottom: 20px;">😈</div>
+                    <h3 style="color: var(--kuromi-dark-purple); margin-bottom: 10px;">目前尚未收到任何訂單唷！</h3>
+                    <p style="color: var(--text-muted); font-size: 14px;">當有顧客送出訂購表單後，這裡就會自動載入最新的訂單資料。</p>
+                    <div style="margin-top: 25px;">
+                        <a href="/order" class="btn-kuromi" style="font-size: 14px; padding: 8px 20px;">去前台下一筆訂單 🍰</a>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+
+        <!-- 分頁導航 -->
+        {% if total_pages > 1 %}
+        <div class="pagination">
+            {% if page > 1 %}
+                <a href="{{ url_for('admin', page=page-1) }}" class="page-link prev">上一頁 ⬅️</a>
+            {% else %}
+                <span class="page-link prev disabled">上一頁 ⬅️</span>
+            {% endif %}
+            
+            {% for p in range(1, total_pages + 1) %}
+                {% if p == page %}
+                    <span class="page-link active">{{ p }}</span>
+                {% else %}
+                    <a href="{{ url_for('admin', page=p) }}" class="page-link">{{ p }}</a>
+                {% endif %}
+            {% endfor %}
+            
+            {% if page < total_pages %}
+                <a href="{{ url_for('admin', page=page+1) }}" class="page-link next">下一頁 ➡️</a>
+            {% else %}
+                <span class="page-link next disabled">下一頁 ➡️</span>
+            {% endif %}
+        </div>
+        {% endif %}
+
+    </main>
+
+    <!-- 頁尾 -->
+    <footer>
+        <div class="footer-content">
+            <h3>🖤 Kuromi Sweet Time 🖤</h3>
+            <p>台北市大安區甜蜜路 99 號 | 電話：(02) 1234-5678</p>
+            <p>© 2026 酷洛米甜點時光. All Rights Reserved. 期末專案網站</p>
+        </div>
+    </footer>
+
+    <script>
+        function toggleText(btn) {
+            const cell = btn.closest('.expandable-cell');
+            cell.classList.toggle('expanded');
+            if (cell.classList.contains('expanded')) {
+                btn.textContent = '收合資訊';
+            } else {
+                btn.textContent = '顯示完整資訊';
+            }
+        }
+    </script>
+
+</body>
+</html>

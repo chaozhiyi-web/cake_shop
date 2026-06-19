@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>管理員登入 - 酷洛米甜點時光 Kuromi Sweet Time</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        .login-container {
+            max-width: 400px;
+            margin: 100px auto;
+            background-color: var(--white);
+            border-radius: 25px;
+            border: 4px solid var(--kuromi-black);
+            box-shadow: 8px 8px 0 var(--kuromi-black);
+            overflow: hidden;
+        }
+        .login-header {
+            background-color: var(--kuromi-dark-purple);
+            color: var(--white);
+            padding: 25px;
+            text-align: center;
+            border-bottom: 4px solid var(--kuromi-black);
+        }
+        .login-form {
+            padding: 30px;
+        }
+        .error-msg {
+            color: var(--kuromi-pink);
+            background-color: var(--kuromi-light-pink);
+            padding: 10px;
+            border-radius: 10px;
+            font-size: 14px;
+            margin-bottom: 20px;
+            text-align: center;
+            border: 1px dashed var(--kuromi-pink);
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 導覽列 (只留首頁連結) -->
+    <header>
+        <div class="nav-container">
+            <a href="/" class="logo">
+                <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Kuromi Logo" class="logo-img">
+                <span>Kuromi Sweet Time</span>
+            </a>
+            <nav>
+                <ul>
+                    <li><a href="/">回首頁</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="section-container" style="min-height: 60vh;">
+        <div class="login-container">
+            <div class="login-header">
+                <h2 style="font-size: 22px; font-weight: 900;">🔑 管理員後台登入</h2>
+                <p style="font-size: 12px; color: var(--kuromi-light-purple); margin-top: 5px;">請輸入管理員密碼以查看訂單</p>
+            </div>
+            
+            <form action="/admin" method="POST" class="login-form">
+                
+                <!-- 錯誤訊息提示 -->
+                {% if error %}
+                    <div class="error-msg">{{ error }}</div>
+                {% endif %}
+                
+                <!-- 密碼輸入 -->
+                <div class="form-group">
+                    <label for="password" class="form-label">後台管理密碼 <span>*</span></label>
+                    <input type="password" id="password" name="password" class="form-control" placeholder="請輸入登入密碼" required autofocus>
+                </div>
+                
+                <!-- 登入按鈕 -->
+                <button type="submit" class="btn-kuromi" style="width: 100%; justify-content: center; margin-top: 15px;">
+                    <span>登入後台 😈</span>
+                </button>
+                
+            </form>
+        </div>
+    </main>
+
+    <!-- 頁尾 -->
+    <footer>
+        <div class="footer-content">
+            <h3>🖤 Kuromi Sweet Time 🖤</h3>
+            <p>© 2026 酷洛米甜點時光. All Rights Reserved. 期末專案網站</p>
+        </div>
+    </footer>
+
+</body>
+</html>

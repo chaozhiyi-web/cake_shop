@@ -1,0 +1,909 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Nunito:wght@400;600;700;800&display=swap');
+
+:root {
+    /* 庫洛米設計系統色調 */
+    --kuromi-black: #1C1721;       /* 惡魔黑 */
+    --kuromi-dark-purple: #352644;  /* 深夜紫 */
+    --kuromi-purple: #9063CD;       /* 庫洛米紫 */
+    --kuromi-light-purple: #F0E6FF; /* 粉紫 */
+    --kuromi-pink: #FF358B;         /* 桃紅色 (愛心與骷髏蝴蝶結的顏色) */
+    --kuromi-light-pink: #FFEBF4;   /* 粉色背景 */
+    --bg-color: #F8F4FC;            /* 整體背景 */
+    --text-dark: #2A1F35;           /* 暗色字體 */
+    --text-muted: #6C5A80;          /* 灰紫色字體 */
+    --white: #FFFFFF;
+    --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    
+    /* 陰影設計 */
+    --shadow-sm: 0 4px 6px rgba(53, 38, 68, 0.05);
+    --shadow-md: 0 8px 20px rgba(144, 99, 205, 0.1);
+    --shadow-lg: 0 12px 30px rgba(53, 38, 68, 0.15);
+    --shadow-pink: 0 8px 20px rgba(255, 53, 139, 0.2);
+}
+
+/* 全域設定 */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Nunito', 'Noto Sans TC', sans-serif;
+    background-color: #EEE9F8;
+    background-image: url('/static/images/kuromi_bg.png');
+    background-repeat: repeat;
+    background-size: 320px 320px;
+    color: var(--text-dark);
+    line-height: 1.6;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* 庫洛米風格標題框 */
+.kuromi-border {
+    border: 3px solid var(--kuromi-black);
+    border-radius: 20px;
+    box-shadow: 5px 5px 0px var(--kuromi-black);
+}
+
+/* 導覽列 */
+header {
+    background-color: var(--kuromi-dark-purple);
+    color: var(--white);
+    padding: 15px 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    border-bottom: 4px solid var(--kuromi-black);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 24px;
+    font-weight: 900;
+    color: var(--white);
+}
+
+.logo span {
+    color: var(--kuromi-pink);
+    text-shadow: 2px 2px 0 var(--kuromi-black);
+}
+
+.logo-img {
+    height: 45px;
+    width: auto;
+    object-fit: contain;
+    transition: var(--transition);
+}
+
+.logo:hover .logo-img {
+    transform: scale(1.1) rotate(-8deg);
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+    gap: 20px;
+}
+
+nav ul li a {
+    font-weight: 700;
+    font-size: 16px;
+    padding: 8px 16px;
+    border-radius: 12px;
+    transition: var(--transition);
+}
+
+nav ul li a:hover, nav ul li a.active {
+    background-color: var(--kuromi-pink);
+    color: var(--white);
+    box-shadow: 2px 2px 0 var(--kuromi-black);
+    border: 2px solid var(--kuromi-black);
+}
+
+/* Hero 區塊 */
+.hero {
+    background-color: var(--kuromi-dark-purple);
+    background-image: url('/static/images/kuromi_hero_bg.png');
+    background-repeat: repeat;
+    background-size: 320px;
+    color: var(--white);
+    padding: 80px 20px;
+    text-align: center;
+    position: relative;
+    border-bottom: 5px solid var(--kuromi-black);
+    overflow: hidden;
+}
+
+/* 星星背景裝飾 */
+.hero::before {
+    content: '★ ✦ ★ ✦';
+    position: absolute;
+    font-size: 24px;
+    color: rgba(255, 53, 139, 0.2);
+    top: 20%;
+    left: 10%;
+    letter-spacing: 50px;
+}
+
+.hero::after {
+    content: '✦ ★ ✦ ★';
+    position: absolute;
+    font-size: 24px;
+    color: rgba(144, 99, 205, 0.2);
+    bottom: 20%;
+    right: 10%;
+    letter-spacing: 50px;
+}
+
+.hero-content {
+    max-width: 800px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 10;
+}
+
+.hero-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background-color: var(--kuromi-pink);
+    color: var(--white);
+    padding: 6px 18px;
+    border-radius: 50px;
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    border: 2px solid var(--kuromi-black);
+    box-shadow: 3px 3px 0 var(--kuromi-black);
+    transform: none;
+}
+
+.badge-logo {
+    height: 20px;
+    width: auto;
+    object-fit: contain;
+}
+
+.hero h1 {
+    font-size: 48px;
+    font-weight: 900;
+    margin-bottom: 20px;
+    text-shadow: 3px 3px 0 var(--kuromi-black);
+    letter-spacing: 2px;
+}
+
+.hero p {
+    font-size: 18px;
+    color: var(--kuromi-light-purple);
+    margin-bottom: 35px;
+}
+
+/* 庫洛米風按鈕 */
+.btn-kuromi {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background-color: var(--kuromi-pink);
+    color: var(--white);
+    font-weight: 800;
+    font-size: 18px;
+    padding: 12px 32px;
+    border: 3px solid var(--kuromi-black);
+    border-radius: 15px;
+    box-shadow: 4px 4px 0 var(--kuromi-black);
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.btn-kuromi:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0 var(--kuromi-black);
+    background-color: #ff559f;
+}
+
+.btn-kuromi:active {
+    transform: translate(2px, 2px);
+    box-shadow: 2px 2px 0 var(--kuromi-black);
+}
+
+.btn-secondary {
+    background-color: var(--kuromi-purple);
+}
+
+.btn-secondary:hover {
+    background-color: #a47be4;
+}
+
+/* 內容區塊 */
+.section-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 60px auto;
+    padding: 0 20px;
+}
+
+.section-title {
+    text-align: center;
+    font-size: 32px;
+    font-weight: 900;
+    margin-bottom: 40px;
+    color: var(--kuromi-dark-purple);
+    position: relative;
+    display: inline-block;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.section-title::before {
+    content: '☠';
+    color: var(--kuromi-pink);
+    margin-right: 10px;
+    font-size: 28px;
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    width: 60%;
+    height: 6px;
+    background-color: var(--kuromi-light-purple);
+    bottom: -8px;
+    left: 20%;
+    z-index: -1;
+    border-radius: 10px;
+}
+
+/* 品牌介紹卡片 */
+.intro-card {
+    background-color: var(--white);
+    padding: 40px;
+    border-radius: 24px;
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    margin-bottom: 60px;
+    box-shadow: var(--shadow-md);
+    border: 3px solid var(--kuromi-light-purple);
+}
+
+.intro-img {
+    flex: 1;
+    min-width: 300px;
+    border-radius: 18px;
+    overflow: hidden;
+    border: 3px solid var(--kuromi-black);
+    box-shadow: 6px 6px 0 var(--kuromi-black);
+}
+
+.intro-img img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    display: block;
+}
+
+.intro-text {
+    flex: 1.5;
+}
+
+.intro-text h3 {
+    font-size: 26px;
+    color: var(--kuromi-dark-purple);
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.intro-text p {
+    color: var(--text-muted);
+    font-size: 16px;
+    margin-bottom: 20px;
+    line-height: 1.8;
+}
+
+/* 蛋糕展示區塊 */
+.cake-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    margin-top: 20px;
+}
+
+.cake-card {
+    background-color: var(--white);
+    border-radius: 20px;
+    overflow: hidden;
+    border: 3px solid var(--kuromi-black);
+    box-shadow: 4px 4px 0 var(--kuromi-black);
+    transition: var(--transition);
+    display: flex;
+    flex-direction: column;
+}
+
+.cake-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 8px 8px 0 var(--kuromi-black);
+    border-color: var(--kuromi-pink);
+}
+
+.cake-img-wrapper {
+    position: relative;
+    height: 220px;
+    overflow: hidden;
+    background-color: var(--kuromi-light-purple);
+}
+
+.cake-img-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.cake-card:hover .cake-img-wrapper img {
+    transform: scale(1.1);
+}
+
+.cake-badge {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background-color: var(--kuromi-black);
+    color: var(--white);
+    padding: 4px 12px;
+    border-radius: 30px;
+    font-size: 12px;
+    font-weight: 700;
+    border: 2px solid var(--kuromi-pink);
+}
+
+.cake-info {
+    padding: 20px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.cake-title {
+    font-size: 20px;
+    font-weight: 800;
+    color: var(--kuromi-dark-purple);
+    margin-bottom: 8px;
+}
+
+.cake-desc {
+    color: var(--text-muted);
+    font-size: 14px;
+    margin-bottom: 15px;
+    flex-grow: 1;
+}
+
+.cake-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 2px dashed var(--kuromi-light-purple);
+    padding-top: 15px;
+}
+
+.cake-price {
+    font-size: 18px;
+    font-weight: 900;
+    color: var(--kuromi-pink);
+}
+
+/* 訂購表單區塊 */
+.order-container {
+    width: 100%;
+    max-width: 700px;
+    margin: 40px auto;
+    background-color: var(--white);
+    border-radius: 30px;
+    border: 4px solid var(--kuromi-black);
+    box-shadow: 8px 8px 0 var(--kuromi-black);
+    overflow: hidden;
+}
+
+.order-header {
+    background-color: var(--kuromi-dark-purple);
+    color: var(--white);
+    padding: 30px;
+    text-align: center;
+    border-bottom: 4px solid var(--kuromi-black);
+    position: relative;
+}
+
+.order-header h2 {
+    font-size: 28px;
+    font-weight: 900;
+    margin-bottom: 5px;
+}
+
+.order-header p {
+    color: var(--kuromi-light-purple);
+    font-size: 14px;
+}
+
+.order-form {
+    padding: 40px;
+}
+
+.form-group {
+    margin-bottom: 25px;
+}
+
+.form-group.hidden {
+    display: none;
+}
+
+.form-label {
+    display: block;
+    font-weight: 700;
+    font-size: 15px;
+    color: var(--kuromi-dark-purple);
+    margin-bottom: 8px;
+}
+
+.form-label span {
+    color: var(--kuromi-pink);
+}
+
+.form-control {
+    width: 100%;
+    padding: 12px 18px;
+    border: 2px solid var(--kuromi-light-purple);
+    border-radius: 14px;
+    font-family: inherit;
+    font-size: 15px;
+    color: var(--text-dark);
+    background-color: #FAF8FD;
+    transition: var(--transition);
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: var(--kuromi-purple);
+    background-color: var(--white);
+    box-shadow: 0 0 0 3px rgba(144, 99, 205, 0.15);
+}
+
+/* Radio 按鈕與 Checkbox 庫洛米風格美化 */
+.radio-group {
+    display: flex;
+    gap: 20px;
+    margin-top: 8px;
+}
+
+.radio-option {
+    position: relative;
+    cursor: pointer;
+}
+
+.radio-option input {
+    display: none;
+}
+
+.radio-label {
+    display: inline-block;
+    padding: 10px 24px;
+    background-color: #FAF8FD;
+    border: 2px solid var(--kuromi-light-purple);
+    border-radius: 12px;
+    font-weight: 700;
+    transition: var(--transition);
+}
+
+.radio-option input:checked + .radio-label {
+    background-color: var(--kuromi-light-pink);
+    border-color: var(--kuromi-pink);
+    color: var(--kuromi-pink);
+    box-shadow: 2px 2px 0 var(--kuromi-black);
+    border: 2px solid var(--kuromi-black);
+}
+
+/* 訂購成功畫面 */
+.success-card {
+    text-align: center;
+    background-color: var(--white);
+    padding: 50px 40px;
+    border-radius: 30px;
+    border: 4px solid var(--kuromi-black);
+    box-shadow: 8px 8px 0 var(--kuromi-black);
+    width: 100%;
+    max-width: 650px;
+    margin: 40px auto;
+}
+
+.success-icon {
+    width: 80px;
+    height: 80px;
+    background-color: var(--kuromi-light-pink);
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 45px;
+    color: var(--kuromi-pink);
+    border: 3px solid var(--kuromi-black);
+    margin-bottom: 25px;
+    box-shadow: 3px 3px 0 var(--kuromi-black);
+    animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+.success-card h2 {
+    font-size: 32px;
+    color: var(--kuromi-dark-purple);
+    margin-bottom: 10px;
+}
+
+.success-card p {
+    color: var(--text-muted);
+    margin-bottom: 30px;
+}
+
+.email-banner {
+    background-color: #E8F5E9;
+    color: #2E7D32;
+    padding: 10px;
+    border-radius: 10px;
+    font-size: 14px;
+    margin-bottom: 30px;
+    border: 1px solid #C8E6C9;
+}
+
+.email-banner.failed {
+    background-color: var(--kuromi-light-pink);
+    color: var(--kuromi-pink);
+    border: 1px dashed var(--kuromi-pink);
+}
+
+.order-detail-box {
+    background-color: var(--bg-color);
+    border-radius: 18px;
+    padding: 25px;
+    text-align: left;
+    margin-bottom: 35px;
+    border: 2px solid var(--kuromi-light-purple);
+}
+
+.detail-title {
+    font-size: 18px;
+    font-weight: 800;
+    color: var(--kuromi-dark-purple);
+    border-bottom: 2px dashed var(--kuromi-light-purple);
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.detail-row {
+    display: flex;
+    margin-bottom: 12px;
+    font-size: 15px;
+}
+
+.detail-label {
+    width: 120px;
+    font-weight: 700;
+    color: var(--text-muted);
+}
+
+.detail-value {
+    flex-grow: 1;
+    color: var(--text-dark);
+}
+
+/* 後台訂單頁面 */
+.admin-header-box {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.admin-title {
+    font-size: 32px;
+    font-weight: 900;
+    color: var(--kuromi-dark-purple);
+}
+
+.stat-card {
+    background-color: var(--white);
+    border-radius: 15px;
+    padding: 15px 30px;
+    border: 3px solid var(--kuromi-black);
+    box-shadow: 4px 4px 0 var(--kuromi-black);
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.stat-num {
+    font-size: 28px;
+    font-weight: 900;
+    color: var(--kuromi-pink);
+}
+
+.orders-table-wrapper {
+    background-color: var(--white);
+    border-radius: 20px;
+    border: 3px solid var(--kuromi-black);
+    box-shadow: 6px 6px 0 var(--kuromi-black);
+    overflow-x: auto;
+    margin-bottom: 40px;
+}
+
+.orders-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    min-width: 800px;
+}
+
+.orders-table th {
+    background-color: var(--kuromi-dark-purple);
+    color: var(--white);
+    padding: 18px 15px;
+    font-weight: 700;
+    font-size: 15px;
+    border-bottom: 3px solid var(--kuromi-black);
+}
+
+.orders-table td {
+    padding: 15px;
+    border-bottom: 1px solid var(--kuromi-light-purple);
+    font-size: 14px;
+}
+
+.orders-table tr:hover td {
+    background-color: #FAF6FF;
+}
+
+.orders-table tr:last-child td {
+    border-bottom: none;
+}
+
+.badge-delivery {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 700;
+    border: 1px solid;
+}
+
+.badge-delivery.pickup {
+    background-color: #E8F5E9;
+    color: #2E7D32;
+    border-color: #A5D6A7;
+}
+
+.badge-delivery.delivery {
+    background-color: #EDE7F6;
+    color: #5E35B1;
+    border-color: #D1C4E9;
+}
+
+/* 頁尾 */
+footer {
+    background-color: var(--kuromi-black);
+    color: var(--white);
+    text-align: center;
+    padding: 40px 20px;
+    border-top: 5px solid var(--kuromi-pink);
+    font-size: 14px;
+    margin-top: auto;
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.footer-content p {
+    color: #A39BB0;
+    margin-top: 10px;
+}
+
+/* 響應式調整 */
+@media (max-width: 768px) {
+    .nav-container {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .hero h1 {
+        font-size: 36px;
+    }
+    
+    .intro-card {
+        flex-direction: column;
+        padding: 20px;
+    }
+    
+    .intro-img {
+        width: 100%;
+        min-width: unset;
+    }
+    
+    .order-form {
+        padding: 20px;
+    }
+    
+    .radio-group {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .admin-header-box {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .featured-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* 推薦品項 featured grid */
+.featured-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    margin-top: 20px;
+}
+.featured-card {
+    background: white;
+    border-radius: 20px;
+    overflow: hidden;
+    border: 3px solid var(--kuromi-black);
+    box-shadow: 4px 4px 0 var(--kuromi-black);
+    display: flex;
+    flex-direction: column;
+    transition: var(--transition);
+}
+.featured-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 8px 8px 0 var(--kuromi-black);
+    border-color: var(--kuromi-pink);
+}
+.featured-img-wrapper {
+    position: relative;
+    height: 280px;
+    overflow: hidden;
+    background: var(--kuromi-light-purple);
+}
+.featured-img-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+.featured-card:hover .featured-img-wrapper img { transform: scale(1.1); }
+
+/* 分頁 tabs */
+.page-tabs {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 25px;
+    flex-wrap: wrap;
+}
+.page-tab {
+    padding: 10px 22px;
+    border: 3px solid var(--kuromi-black);
+    border-radius: 50px;
+    background: white;
+    font-family: inherit;
+    font-weight: 800;
+    font-size: 15px;
+    cursor: pointer;
+    transition: var(--transition);
+    box-shadow: 3px 3px 0 var(--kuromi-black);
+    color: var(--kuromi-dark-purple);
+}
+.page-tab:hover {
+    background: var(--kuromi-light-purple);
+    transform: translate(-1px, -1px);
+    box-shadow: 4px 4px 0 var(--kuromi-black);
+}
+
+.page-tab.active {
+    background: var(--kuromi-pink);
+    color: white;
+    box-shadow: 3px 3px 0 var(--kuromi-black);
+}
+
+/* 展開/收合儲存格 */
+.expandable-cell {
+    max-width: 150px;
+}
+.expandable-cell .text-wrapper {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    transition: all 0.3s ease;
+}
+.expandable-cell.expanded .text-wrapper {
+    overflow: visible;
+    text-overflow: clip;
+    white-space: normal;
+    word-break: break-all;
+}
+.toggle-text-btn {
+    display: inline-block;
+    color: var(--kuromi-purple);
+    font-size: 11px;
+    font-weight: bold;
+    cursor: pointer;
+    text-decoration: underline;
+    margin-top: 4px;
+}
+.toggle-text-btn:hover {
+    color: var(--kuromi-pink);
+}
+
+/* 後台分頁 */
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    margin: 30px 0 50px 0;
+}
+.pagination .page-link {
+    padding: 8px 16px;
+    border: 3px solid var(--kuromi-black);
+    border-radius: 12px;
+    background: white;
+    font-weight: 800;
+    font-size: 14px;
+    color: var(--kuromi-dark-purple);
+    box-shadow: 3px 3px 0 var(--kuromi-black);
+    transition: var(--transition);
+    cursor: pointer;
+}
+.pagination .page-link:hover:not(.disabled) {
+    background: var(--kuromi-light-purple);
+    transform: translate(-1px, -1px);
+    box-shadow: 4px 4px 0 var(--kuromi-black);
+}
+.pagination .page-link.active {
+    background: var(--kuromi-pink);
+    color: white;
+}
+.pagination .page-link.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    box-shadow: none;
+    transform: none;
+}

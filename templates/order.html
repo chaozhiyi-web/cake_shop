@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>填寫訂購單 - 酷洛米甜點時光 Kuromi Sweet Time</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <!-- 導覽列 -->
+    <header>
+        <div class="nav-container">
+            <a href="/" class="logo">
+                <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Kuromi Logo" class="logo-img">
+                <span>Kuromi Sweet Time</span>
+            </a>
+            <nav>
+                <ul>
+                    <li><a href="/">首頁</a></li>
+                    <li><a href="/order" class="active">線上訂購</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="section-container">
+        
+        <div class="order-container">
+            <div class="order-header">
+                <h2>😈 線上訂購單 😈</h2>
+                <p>請填寫以下資訊，我們會盡快為您製作美味的蛋糕！</p>
+            </div>
+            
+            <form action="/order" method="POST" class="order-form" id="cakeOrderForm">
+                
+                <!-- 顧客姓名 -->
+                <div class="form-group">
+                    <label for="name" class="form-label">顧客姓名 <span>*</span></label>
+                    <input type="text" id="name" name="name" class="form-control" placeholder="請輸入您的姓名" required>
+                </div>
+
+                <!-- 聯絡電話 -->
+                <div class="form-group">
+                    <label for="phone" class="form-label">聯絡電話 <span>*</span></label>
+                    <input type="tel" id="phone" name="phone" class="form-control" placeholder="例如：0912-345678" required>
+                </div>
+
+                <!-- Email -->
+                <div class="form-group">
+                    <label for="email" class="form-label">電子信箱 Email <span>*</span></label>
+                    <input type="email" id="email" name="email" class="form-control" placeholder="用於接收訂購成功通知信" required>
+                </div>
+
+                <!-- 蛋糕品項 -->
+                <div class="form-group">
+                    <label for="cake_item" class="form-label">選擇蛋糕品項 <span>*</span></label>
+                    <select id="cake_item" name="cake_item" class="form-control" required>
+                        <option value="" disabled selected>-- 請選擇美味蛋糕 --</option>
+                        {% for cake in cakes %}
+                            <option value="{{ cake }}">{{ cake }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <!-- 數量 -->
+                <div class="form-group">
+                    <label for="quantity" class="form-label">訂購數量 <span>*</span></label>
+                    <input type="number" id="quantity" name="quantity" class="form-control" min="1" max="20" value="1" required>
+                </div>
+
+                <!-- 取貨或外送方式 -->
+                <div class="form-group">
+                    <label class="form-label">配送/取貨方式 <span>*</span></label>
+                    <div class="radio-group">
+                        <label class="radio-option">
+                            <input type="radio" name="delivery_type" value="自取" checked onclick="toggleAddress(false)">
+                            <span class="radio-label">門市自取 🏪</span>
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="delivery_type" value="外送" onclick="toggleAddress(true)">
+                            <span class="radio-label">黑貓外送 🚚</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- 外送地址 (預設隱藏，外送時才顯示) -->
+                <div class="form-group hidden" id="address_group">
+                    <label for="address" class="form-label">外送地址 <span>*</span></label>
+                    <input type="text" id="address" name="address" class="form-control" placeholder="請輸入完整外送地址">
+                </div>
+
+                <!-- 希望日期 -->
+                <div class="form-group">
+                    <label for="delivery_date" class="form-label">希望取貨/外送日期 <span>*</span></label>
+                    <input type="date" id="delivery_date" name="delivery_date" class="form-control" required>
+                </div>
+
+                <!-- 備註 -->
+                <div class="form-group">
+                    <label for="notes" class="form-label">備註與特殊需求</label>
+                    <textarea id="notes" name="notes" class="form-control" rows="3" placeholder="例如：蠟燭數量、寫字服務或過敏原注意事項..."></textarea>
+                </div>
+
+                <!-- 送出按鈕 -->
+                <div style="text-align: center; margin-top: 35px;">
+                    <button type="submit" class="btn-kuromi" style="width: 100%; justify-content: center; font-size: 20px;">
+                        <span>確認送出訂單 🖤</span>
+                    </button>
+                </div>
+
+            </form>
+        </div>
+
+    </main>
+
+    <!-- 頁尾 -->
+    <footer>
+        <div class="footer-content">
+            <h3>🖤 Kuromi Sweet Time 🖤</h3>
+            <p>台北市大安區甜蜜路 99 號 | 電話：(02) 1234-5678</p>
+            <p>© 2026 酷洛米甜點時光. All Rights Reserved. 期末專案網站 | <a href="/admin" style="font-size: 11px; opacity: 0.4; color: #A39BB0; text-decoration: none;">管理登入</a></p>
+        </div>
+    </footer>
+
+    <!-- JavaScript 互動效果 -->
+    <script>
+        // 設定取貨日期的最小值為明天 (避免選到過去的日期)
+        const dateInput = document.getElementById('delivery_date');
+        const tomorrow = new Date();
+        tomorrow.setDate(tomorrow.getDate() + 1);
+        const yyyy = tomorrow.getFullYear();
+        let mm = tomorrow.getMonth() + 1;
+        let dd = tomorrow.getDate();
+        
+        if (mm < 10) mm = '0' + mm;
+        if (dd < 10) dd = '0' + dd;
+        
+        dateInput.min = `${yyyy}-${mm}-${dd}`;
+        dateInput.value = `${yyyy}-${mm}-${dd}`; // 預設明天
+
+        // 控制外送地址欄位顯示/隱藏與必填狀態
+        function toggleAddress(show) {
+            const addressGroup = document.getElementById('address_group');
+            const addressInput = document.getElementById('address');
+            if (show) {
+                addressGroup.classList.remove('hidden');
+                addressInput.required = true;
+                addressInput.focus();
+            } else {
+                addressGroup.classList.add('hidden');
+                addressInput.required = false;
+                addressInput.value = '';
+            }
+        }
+
+        // 解析 URL Query String 自動選取點擊的蛋糕
+        window.addEventListener('DOMContentLoaded', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const selectedCake = urlParams.get('item');
+            if (selectedCake) {
+                const selectElement = document.getElementById('cake_item');
+                for (let option of selectElement.options) {
+                    if (option.value === selectedCake) {
+                        option.selected = true;
+                        break;
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
